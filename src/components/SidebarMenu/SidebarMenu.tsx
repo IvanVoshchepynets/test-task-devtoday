@@ -43,7 +43,7 @@ const SidebarItem: React.FC<{ item: Item; activeItem?: string }> = ({ item, acti
         onClick={() => setExpanded((s) => !s)}
       >
         {item.href ? <a href={item.href}>{item.label}</a> : item.label}
-        {item.children?.length ? (expanded ? ' down' : ' right') : null}
+        {item.children?.length ? (expanded ? ' ▾' : ' ▸') : null}
       </div>
       {item.children && expanded && (
         <ul className="rc-sidebar__sub">

@@ -43,7 +43,7 @@ const Toast: React.FC<ToastProps> = ({ duration = 4000, onClose, children }) => 
         style={{ marginLeft: 8, border: 'none', background: 'transparent', cursor: 'pointer' }}
         onClick={() => setVisible(false)}
       >
-        Close
+        x
       </button>
     </div>
   );

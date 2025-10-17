@@ -41,12 +41,12 @@ export const Input: React.FC<Props> = ({
           className="rc-input__icon"
           onClick={() => setVisible((v) => !v)}
         >
-          {visible ? 'Hide' : 'Show'}
+          {visible ? '👁️' : '👁️'}
         </button>
       )}
       {clearable && typeof value === 'string' && value.length > 0 && (
         <button type="button" className="rc-input__clear" onClick={handleClear} aria-label="clear">
-          Clear
+          x
         </button>
       )}
     </div>

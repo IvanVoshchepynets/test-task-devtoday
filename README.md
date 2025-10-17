@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Test-task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## How to Run the Project
 
-Currently, two official plugins are available:
+1. Clone the repository:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   git clone https://github.com/IvanVoshchepynets/test-task-devtoday.git
 
-## React Compiler
+2. Navigate into the folder:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+   cd test-task
 
-## Expanding the ESLint configuration
+3. Install dependencies and start the storybook:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   npm run storybook
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Components Overview
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+### Input
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Types:** `text`, `password`, `number`
+- **Props:** `clearable`, `placeholder`, `disabled`
+- **Buttons:** x _Clear_ and 👁 _Show/Hide_
+- **Integration:** compatible with `React Hook Form`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+### Toast
+
+- **Types:** `success`, `error`, `info`
+- **Position:** bottom-right corner
+- **Behavior:** automatically disappears after the given `duration`
+- **Animation:** smooth fade/slide transition
+- **Extras:** manual close button (x)
+
+---
+
+### SidebarMenu
+
+- **Animation:** slides in from the right
+- **Structure:** supports nested submenus (_accordion style_)
+- **UX:** closes when clicking outside the menu
+- **Visuals:** highlights the active item
+
+## Components Screenshots
+
+### Storybook UI
+
+![Storybook Overview](./docs/screenshots/storybook-overview.png)
+
+### Input Component
+
+![Input Text](./docs/screenshots/input-text.png)
+![Input Number](./docs/screenshots/input-number.png)
+![Password Input](./docs/screenshots/input-password.png)
+
+### Toast Component
+
+![Toast Success](./docs/screenshots/toast-success.png)
+![Toast Error](./docs/screenshots/toast-error.png)
+![Toast Info](./docs/screenshots/toast-info.png)
+
+### Sidebar Menu
+
+![Sidebar Open](./docs/screenshots/sidebar-open.png)
+![Sidebar Nested1](./docs/screenshots/sidebar-nested1.png)
+![Sidebar Nested2](./docs/screenshots/sidebar-nested2.png)
+
+### Input + Hook Form
+
+![Hook Form](./docs/screenshots/hookform-validation.png)
+![Hook Form Success](./docs/screenshots/hookform-success.png)
