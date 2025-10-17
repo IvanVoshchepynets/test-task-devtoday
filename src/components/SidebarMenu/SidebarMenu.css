@@ -1,0 +1,40 @@
+.rc-sidebar__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 200ms;
+  pointer-events: none;
+}
+
+.rc-sidebar__backdrop.open {
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+.rc-sidebar {
+  position: fixed;
+  right: -320px;
+  top: 0;
+  height: 100%;
+  width: 320px;
+  background: #fff;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+  transition: right 300ms ease;
+}
+
+.rc-sidebar.open {
+  right: 0;
+}
+
+.rc-sidebar__inner {
+  padding: 16px;
+}
+
+.rc-sidebar__item {
+  padding: 8px 4px;
+  cursor: pointer;
+}
+
+.rc-sidebar__sub {
+  padding-left: 12px;
+}
