@@ -1,26 +1,35 @@
-import React, { useState, type InputHTMLAttributes } from "react";
-import "./Input.css";
+import React, { useState, type InputHTMLAttributes } from 'react';
+import './Input.css';
 
 type Props = {
   clearable?: boolean;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
-  type?: "text" | "password" | "number";
-};
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> & {
+    type?: 'text' | 'password' | 'number';
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  };
 
-export const Input: React.FC<Props> = ({ clearable = false, type = "text", value, onChange, ...rest }) => {
+export const Input: React.FC<Props> = ({
+  clearable = false,
+  type = 'text',
+  value,
+  onChange,
+  ...rest
+}) => {
   const [visible, setVisible] = useState(false);
-  const isPassword = type === "password";
+  const isPassword = type === 'password';
 
   const handleClear = () => {
-    const ev = { target: { value: "" } } as unknown as React.ChangeEvent<HTMLInputElement>;
-    if (onChange) onChange(ev);
+    if (onChange) {
+      const ev = { target: { value: '' } } as React.ChangeEvent<HTMLInputElement>;
+      onChange(ev);
+    }
   };
 
   return (
     <div className="rc-input">
       <input
         {...rest}
-        type={isPassword ? (visible ? "text" : "password") : type}
+        type={isPassword ? (visible ? 'text' : 'password') : type}
         value={value}
         onChange={onChange}
         className="rc-input__field"
@@ -32,11 +41,11 @@ export const Input: React.FC<Props> = ({ clearable = false, type = "text", value
           className="rc-input__icon"
           onClick={() => setVisible((v) => !v)}
         >
-          {visible ? "Closed" : "Open"}
+          {visible ? 'Hide' : 'Show'}
         </button>
       )}
-      {clearable && (value as any) && (
-        <button className="rc-input__clear" onClick={handleClear} aria-label="clear">
+      {clearable && typeof value === 'string' && value.length > 0 && (
+        <button type="button" className="rc-input__clear" onClick={handleClear} aria-label="clear">
           Clear
         </button>
       )}

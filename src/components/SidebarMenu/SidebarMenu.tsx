@@ -1,5 +1,5 @@
-import React from "react";
-import "./SidebarMenu.css";
+import React from 'react';
+import './SidebarMenu.css';
 
 export type Item = { id: string; label: string; href?: string; children?: Item[] };
 
@@ -13,10 +13,12 @@ export type SidebarMenuProps = {
 export const SidebarMenu: React.FC<SidebarMenuProps> = ({ open, onClose, items, activeItem }) => {
   return (
     <>
-      <div className={`rc-sidebar__backdrop ${open ? "open" : ""}`} onClick={onClose} />
-      <aside className={`rc-sidebar ${open ? "open" : ""}`} aria-hidden={!open}>
+      <div className={`rc-sidebar__backdrop ${open ? 'open' : ''}`} onClick={onClose} />
+      <aside className={`rc-sidebar ${open ? 'open' : ''}`} aria-hidden={!open}>
         <div className="rc-sidebar__inner">
-          <button className="rc-sidebar__close" onClick={onClose}>Close</button>
+          <button className="rc-sidebar__close" onClick={onClose}>
+            Close
+          </button>
           <nav>
             <ul>
               {items.map((it) => (
@@ -37,11 +39,11 @@ const SidebarItem: React.FC<{ item: Item; activeItem?: string }> = ({ item, acti
   return (
     <li>
       <div
-        className={`rc-sidebar__item ${isActive ? "active" : ""}`}
+        className={`rc-sidebar__item ${isActive ? 'active' : ''}`}
         onClick={() => setExpanded((s) => !s)}
       >
         {item.href ? <a href={item.href}>{item.label}</a> : item.label}
-        {item.children?.length ? (expanded ? " down" : " right") : null}
+        {item.children?.length ? (expanded ? ' down' : ' right') : null}
       </div>
       {item.children && expanded && (
         <ul className="rc-sidebar__sub">
