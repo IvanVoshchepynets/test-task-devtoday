@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 export type ToastProps = {
   id: string;
-  type?: "info" | "success" | "error";
+  type?: 'info' | 'success' | 'error';
   duration?: number;
   onClose: () => void;
   children: React.ReactNode;
@@ -27,20 +27,20 @@ const Toast: React.FC<ToastProps> = ({ duration = 4000, onClose, children }) => 
     <div
       style={{
         marginBottom: 8,
-        padding: "8px 12px",
+        padding: '8px 12px',
         minWidth: 200,
         borderRadius: 6,
-        background: "#fff",
-        borderLeft: "4px solid #2196f3",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
-        transform: visible ? "translateY(0)" : "translateY(8px)",
+        background: '#fff',
+        borderLeft: '4px solid #2196f3',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+        transform: visible ? 'translateY(0)' : 'translateY(8px)',
         opacity: visible ? 1 : 0,
-        transition: "all 250ms ease",
+        transition: 'all 250ms ease',
       }}
     >
       {children}
       <button
-        style={{ marginLeft: 8, border: "none", background: "transparent", cursor: "pointer" }}
+        style={{ marginLeft: 8, border: 'none', background: 'transparent', cursor: 'pointer' }}
         onClick={() => setVisible(false)}
       >
         Close
