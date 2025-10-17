@@ -1,13 +1,16 @@
 import React from "react";
 import "./SidebarMenu.css";
 
-type Item = { id: string; label: string; children?: Item[] };
+export type Item = { id: string; label: string; href?: string; children?: Item[] };
 
-export const SidebarMenu: React.FC<{
+export type SidebarMenuProps = {
   open: boolean;
   onClose: () => void;
   items: Item[];
-}> = ({ open, onClose, items }) => {
+  activeItem?: string;
+};
+
+export const SidebarMenu: React.FC<SidebarMenuProps> = ({ open, onClose, items, activeItem }) => {
   return (
     <>
       <div className={`rc-sidebar__backdrop ${open ? "open" : ""}`} onClick={onClose} />
@@ -17,7 +20,7 @@ export const SidebarMenu: React.FC<{
           <nav>
             <ul>
               {items.map((it) => (
-                <SidebarItem key={it.id} item={it} />
+                <SidebarItem key={it.id} item={it} activeItem={activeItem} />
               ))}
             </ul>
           </nav>
@@ -27,16 +30,26 @@ export const SidebarMenu: React.FC<{
   );
 };
 
-const SidebarItem: React.FC<{ item: Item }> = ({ item }) => {
+const SidebarItem: React.FC<{ item: Item; activeItem?: string }> = ({ item, activeItem }) => {
   const [expanded, setExpanded] = React.useState(false);
+  const isActive = activeItem === item.label;
+
   return (
     <li>
-      <div className="rc-sidebar__item" onClick={() => setExpanded((s) => !s)}>
-        {item.label} {item.children?.length ? (expanded ? "down" : "right") : null}
+      <div
+        className={`rc-sidebar__item ${isActive ? "active" : ""}`}
+        onClick={() => setExpanded((s) => !s)}
+      >
+        {item.href ? <a href={item.href}>{item.label}</a> : item.label}
+        {item.children?.length ? (expanded ? " down" : " right") : null}
       </div>
       {item.children && expanded && (
         <ul className="rc-sidebar__sub">
-          {item.children.map((c) => <li key={c.id} className="rc-sidebar__subitem">{c.label}</li>)}
+          {item.children.map((c) => (
+            <li key={c.id} className="rc-sidebar__subitem">
+              {c.label}
+            </li>
+          ))}
         </ul>
       )}
     </li>

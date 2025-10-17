@@ -4,18 +4,31 @@ import Toast from "./Toast";
 type ToastType = "info" | "success" | "error";
 type ToastItem = { id: string; message: string; type?: ToastType; duration?: number };
 
-const ToastContext = createContext<any>(null);
+type ToastContextType = {
+  show: (message: string, opts?: Partial<ToastItem>) => void;
+  remove: (id: string) => void;
+};
 
-export const useToast = () => useContext(ToastContext);
+const ToastContext = createContext<ToastContextType | null>(null);
+
+export const useToast = () => {
+  const ctx = useContext(ToastContext);
+  if (!ctx) throw new Error("useToast must be used within ToastProvider");
+  return ctx;
+};
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const show = useCallback((message: string, opts?: Partial<ToastItem>) => {
     const id = String(Date.now() + Math.random());
-    const toast = { id, message, type: opts?.type || "info", duration: opts?.duration ?? 4000 };
+    const toast: ToastItem = {
+      id,
+      message,
+      type: opts?.type ?? "info",
+      duration: opts?.duration ?? 4000,
+    };
     setToasts((s) => [...s, toast]);
-    return id;
   }, []);
 
   const remove = useCallback((id: string) => {
